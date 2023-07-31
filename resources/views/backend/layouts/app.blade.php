@@ -20,6 +20,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     padding: 15px 0.5rem;
     margin-top: 15px;
 }
+      .perpage{
+          padding: 4px;
+      }
   </style>
   @livewireStyles
 </head>
@@ -62,6 +65,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
+<script>
+  window.addEventListener('show-form', event => {
+        $('#form').modal('show');
+    });
+    window.addEventListener('hide-form', event => {
+        $('#form').modal('hide');
+    });
+
+</script>
 @livewireScripts
 </body>
 </html>

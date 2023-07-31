@@ -24,106 +24,67 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Bordered Table</h3>
+                            <button wire:click="addNewModule" class="btn btn-primary float-right"><i
+                                    class="fa fa-plus-circle mr-1"></i> Add New
+                            </button>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <div class="card-tools">
-                                <div class="input-group input-group-sm float-right mb-1" style="width: 190px;">
-                                    <input type="text" name="table_search" class="form-control float-right"
-                                           placeholder="Search">
-
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <label>Per Page</label>
-                                    <select>
-                                        <option>10</option>
-                                        <option>10</option>
-                                    </select>
-                                    <div class="btn-group">
+                            <div class="card-tools flex">
+                                <x-table.live-search wire:model.live="searchTerm" />
+                                <div class="row justify-content-left">
+                                    <div class="btn-group btn-group-sm mr-1">
                                         <button type="button" class="btn btn-default">Action</button>
-                                        <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown" aria-expanded="false">
-                                        <span class="sr-only">Toggle Dropdown</span>
+                                        <button type="button" class="btn btn-default dropdown-toggle dropdown-icon"
+                                                data-toggle="dropdown" aria-expanded="false">
+                                            <span class="sr-only">Toggle Dropdown</span>
                                         </button>
                                         <div class="dropdown-menu" role="menu" style="">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Separated link</a>
+                                            <a class="dropdown-item" href="#">Action</a>
+                                            <a class="dropdown-item" href="#">Another action</a>
+                                            <a class="dropdown-item" href="#">Something else here</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Separated link</a>
                                         </div>
+                                    </div>
+                                    <div class="">
+                                        <button type="button" class="btn btn-default">Action</button>
                                     </div>
                                 </div>
                                 <div>
-                                    
+
                                 </div>
                             </div>
-                            <table class="table table-bordered">
+                            <table class="table table-bordered table-sm">
                                 <thead>
                                 <tr>
                                     <th style="width: 10px">#</th>
-                                    <th>Task</th>
-                                    <th>Progress</th>
-                                    <th style="width: 40px">Label</th>
+                                    <th>Module Name</th>
+                                    <th>Slug</th>
+                                    <th style="width: 40px">URL</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1.</td>
-                                    <td>Update software</td>
-                                    <td>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-danger">55%</span></td>
-                                </tr>
-                                <tr>
-                                    <td>2.</td>
-                                    <td>Clean database</td>
-                                    <td>
-                                        <div class="progress progress-xs">
-                                            <div class="progress-bar bg-warning" style="width: 70%"></div>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-warning">70%</span></td>
-                                </tr>
-                                <tr>
-                                    <td>3.</td>
-                                    <td>Cron job running</td>
-                                    <td>
-                                        <div class="progress progress-xs progress-striped active">
-                                            <div class="progress-bar bg-primary" style="width: 30%"></div>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-primary">30%</span></td>
-                                </tr>
-                                <tr>
-                                    <td>4.</td>
-                                    <td>Fix and squish bugs</td>
-                                    <td>
-                                        <div class="progress progress-xs progress-striped active">
-                                            <div class="progress-bar bg-success" style="width: 90%"></div>
-                                        </div>
-                                    </td>
-                                    <td><span class="badge bg-success">90%</span></td>
-                                </tr>
+                                @foreach ($modules as $index => $item)
+                                    <tr>
+                                        <td>{{ $modules->firstItem() + $index }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>
+                                            {{ $item->slug }}
+                                        </td>
+                                        <td>1</td>
+                                    </tr>
+
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer clearfix">
-                            <ul class="pagination pagination-sm m-0 float-right">
-                                <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                            </ul>
+                            <x-table.per-page wire:model.live.debounce.150ms="perPage"/>
+                            <div>
+                                {{ $modules->links() }}
+                            </div>
                         </div>
                     </div>
                     <!-- /.card -->
@@ -133,4 +94,77 @@
     </section>
     <!-- /.content -->
     <!-- /.content-wrapper -->
+
+    <div class="modal fade" id="form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+         wire:ignore.self>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        Permission</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form autocomplete="off"
+                      wire:submit="saveModule">
+                    <div class="modal-body">
+                        <div class="card-body">
+                            <div wire:ignore class="form-group">
+                                <label for="module_id">Module</label>
+                                <select class="form-control @error('module_id') is-invalid @enderror"
+                                        wire:model="state.module_id">
+                                    <option value=""></option>
+                                </select>
+                                @error('module_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Permission Name</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                       id="name" placeholder="Enter your name" wire:model="name" required>
+                                @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox"
+                                           class="custom-control-input @error('is_active') is-invalid @enderror"
+                                           id="is_active"
+                                           wire:model.defer="state.is_active">
+                                    <label class="custom-control-label" for="is_active">Status</label>
+                                </div>
+                                @error('is_active')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-check">
+                                {{-- <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Check me out</label> --}}
+                                {{-- <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch> --}}
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                class="fa fa-times mr-1"></i>Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary"><i
+                                class="fa fa-save mr-1"></i>Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

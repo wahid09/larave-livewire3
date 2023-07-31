@@ -130,4 +130,6 @@ return [
     */
 
     'inject_morph_markers' => true,
+
+    'pagination_theme' => 'bootstrap',
 ];

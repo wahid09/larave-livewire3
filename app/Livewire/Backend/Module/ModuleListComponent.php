@@ -14,18 +14,33 @@ class ModuleListComponent extends Component
     protected $paginationTheme = 'bootstrap';
 
     public $name;
+    public $showMore = 0;
+
+    public function open($id)
+    {
+        $this->showMore = $id;
+    }
+
+    public function hideRow($id)
+    {
+        $this->showMore = 0;
+    }
 
     public function addNewModule()
     {
         $this->dispatch('show-form');
     }
-    public function saveModule(){
+
+    public function saveModule()
+    {
         dd($this->name);
     }
+
     public function render()
     {
-        $modules = Module::query()
+        $modules = Module::with('children')
             ->where('name', 'like', '%' . $this->searchTerm . '%')
+            ->orderBy('id', 'ASC')
             ->paginate($this->perPage);
         return view('livewire.backend.module.module-list-component', [
             'modules' => $modules

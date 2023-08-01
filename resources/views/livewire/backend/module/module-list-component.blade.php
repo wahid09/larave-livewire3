@@ -31,7 +31,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="card-tools flex">
-                                <x-table.live-search wire:model.live="searchTerm" />
+                                <x-table.live-search wire:model.live="searchTerm"/>
                                 <div class="row justify-content-left">
                                     <div class="btn-group btn-group-sm mr-1">
                                         <button type="button" class="btn btn-default">Action</button>
@@ -58,24 +58,89 @@
                             <table class="table table-bordered table-sm">
                                 <thead>
                                 <tr>
-                                    <th style="width: 10px">#</th>
-                                    <th>Module Name</th>
-                                    <th>Slug</th>
-                                    <th style="width: 40px">URL</th>
+                                    <th style="width: 3px">#</th>
+                                    {{--                                    <th style="width: 10px">#</th>--}}
+                                    <th>Module Nmae</th>
+                                    {{--                                    <th>Sub-Module</th>--}}
+                                    <th>URL</th>
+                                    <th>Created_at</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                @foreach ($modules as $index => $item)
-                                    <tr>
-                                        <td>{{ $modules->firstItem() + $index }}</td>
+                                <tbody wire:loading.class="text-muted">
+                                @forelse ($modules as $item)
+                                    <tr data-widget="expandable-table" aria-expanded="false">
+                                        <td class="align-middle">
+                                            @if($showMore == 0)
+                                                <button type="button" wire:click="open({{$item->id}})"
+                                                        class="btn btn-link text-info">
+                                                    <i class="far fa-plus-square"></i>
+                                                </button>
+                                            @elseif($showMore == $item->id)
+                                                <button type="button" wire:click="hideRow({{$item->id}})"
+                                                        class="btn btn-link text-info">
+                                                    <i class="far fa-minus-square"></i>
+                                                </button>
+                                            @else
+                                                <button type="button" wire:click="open({{$item->id}})"
+                                                        class="btn btn-link text-info">
+                                                    <i class="far fa-plus-square"></i>
+                                                </button>
+                                            @endif
+                                        </td>
                                         <td>{{ $item->name }}</td>
                                         <td>
-                                            {{ $item->slug }}
+                                            {{ $item->url }}
                                         </td>
-                                        <td>1</td>
+                                        <td>
+                                            {{ $item->created_at->diffForhumans() }}
+                                        </td>
+                                        <td>
+{{--                                            @permission('module-create')--}}
+                                            <a href="" wire:click.prevent="addNewSubModule({{$item}})">
+                                                <i class="fa fa-plus-circle mr-1"></i>
+                                            </a>
+{{--                                            @endpermission--}}
+{{--                                            @permission('module-update')--}}
+                                            <a href="" wire:click.prevent="editModule({{$item}})">
+                                                <i class="fa fa-edit mr-1"></i>
+                                            </a>
+{{--                                            @endpermission--}}
+{{--                                            @permission('module-delete')--}}
+                                            <a href="" wire:click.prevent="deleteConfirm({{ $item->id }})">
+                                                <i class="fa fa-trash text-danger"></i>
+                                            </a>
+{{--                                            @endpermission--}}
+                                        </td>
                                     </tr>
-
-                                @endforeach
+                                    @foreach($item->children as $key)
+                                        <tr class="@if($showMore == $item->id)  @else d-none @endif"
+                                            style="background-color:#f2eee4">
+                                            <td></td>
+                                            <td>{{ $key->name }}</td>
+                                            <td>{{ $key->url }}</td>
+                                            <td>{{ $key->created_at->diffForhumans() }}</td>
+                                            <td>
+{{--                                                @permission('module-update')--}}
+                                                <a href="" wire:click.prevent="editModule({{$key}})">
+                                                    <i class="fa fa-edit mr-1"></i>
+                                                </a>
+{{--                                                @endpermission--}}
+{{--                                                @permission('module-delete')--}}
+                                                <a href="" wire:click.prevent="deleteConfirm({{ $key->id }})">
+                                                    <i class="fa fa-trash text-danger"></i>
+                                                </a>
+{{--                                                @endpermission--}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @empty
+                                    <div>
+                                        <tr class="text-center">
+                                            <td colspan="5">No Data Found.</td>
+                                        </tr>
+                                    </div>
+                                @endforelse
                                 </tbody>
                             </table>
                         </div>
@@ -112,9 +177,14 @@
                         <div class="card-body">
                             <div wire:ignore class="form-group">
                                 <label for="module_id">Module</label>
-                                <select class="form-control @error('module_id') is-invalid @enderror"
+                                <select class="module form-control @error('module_id') is-invalid @enderror"
                                         wire:model="state.module_id">
-                                    <option value=""></option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+
                                 </select>
                                 @error('module_id')
                                 <span class="invalid-feedback" role="alert">
@@ -168,3 +238,10 @@
         </div>
     </div>
 </div>
+@push('js')
+    <script>
+        $(document).ready(function () {
+            $('.module').select2();
+        });
+    </script>
+@endpush

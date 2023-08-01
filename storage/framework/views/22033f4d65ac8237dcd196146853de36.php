@@ -31,16 +31,21 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="card-tools flex">
-                                <div class="input-group float-right mb-1" style="width: 190px;">
-                                    <input type="text" name="table_search" class="form-control float-right"
-                                           placeholder="Search">
-
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default">
-                                            <i class="fas fa-search"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                                <?php if (isset($component)) { $__componentOriginalaf1f941de664d479b3f002781d93f30f = $component; } ?>
+<?php $component = App\View\Components\Table\LiveSearch::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('table.live-search'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\Table\LiveSearch::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['wire:model.live' => 'searchTerm']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalaf1f941de664d479b3f002781d93f30f)): ?>
+<?php $component = $__componentOriginalaf1f941de664d479b3f002781d93f30f; ?>
+<?php unset($__componentOriginalaf1f941de664d479b3f002781d93f30f); ?>
+<?php endif; ?>
                                 <div class="row justify-content-left">
                                     <div class="btn-group btn-group-sm mr-1">
                                         <button type="button" class="btn btn-default">Action</button>
@@ -67,37 +72,96 @@
                             <table class="table table-bordered table-sm">
                                 <thead>
                                 <tr>
-                                    <th style="width: 10px">#</th>
-                                    <th>Module Name</th>
-                                    <th>Slug</th>
-                                    <th style="width: 40px">URL</th>
+                                    <th style="width: 3px">#</th>
+                                    
+                                    <th>Module Nmae</th>
+                                    
+                                    <th>URL</th>
+                                    <th>Created_at</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <!-- __BLOCK__ --><?php $__currentLoopData = $modules; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $index => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <tr>
-                                        <td><?php echo e($modules->firstItem() + $index); ?></td>
+                                <tbody wire:loading.class="text-muted">
+                                <?php $__empty_1 = true; $__currentLoopData = $modules; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                    <tr data-widget="expandable-table" aria-expanded="false">
+                                        <td class="align-middle">
+                                            <!-- __BLOCK__ --><?php if($showMore == 0): ?>
+                                                <button type="button" wire:click="open(<?php echo e($item->id); ?>)"
+                                                        class="btn btn-link text-info">
+                                                    <i class="far fa-plus-square"></i>
+                                                </button>
+                                            <?php elseif($showMore == $item->id): ?>
+                                                <button type="button" wire:click="hideRow(<?php echo e($item->id); ?>)"
+                                                        class="btn btn-link text-info" wire:ignore>
+                                                    <i class="far fa-minus-square"></i>
+                                                </button>
+                                            <?php else: ?>
+                                                <button type="button" wire:click="open(<?php echo e($item->id); ?>)"
+                                                        class="btn btn-link text-info">
+                                                    <i class="far fa-plus-square"></i>
+                                                </button>
+                                            <?php endif; ?> <!-- __ENDBLOCK__ -->
+                                        </td>
                                         <td><?php echo e($item->name); ?></td>
                                         <td>
-                                            <?php echo e($item->slug); ?>
+                                            <?php echo e($item->url); ?>
 
                                         </td>
-                                        <td>1</td>
-                                    </tr>
+                                        <td>
+                                            <?php echo e($item->created_at->diffForhumans()); ?>
 
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <!-- __ENDBLOCK__ -->
+                                        </td>
+                                        <td>
+
+                                            <a href="" wire:click.prevent="addNewSubModule(<?php echo e($item); ?>)">
+                                                <i class="fa fa-plus-circle mr-1"></i>
+                                            </a>
+
+
+                                            <a href="" wire:click.prevent="editModule(<?php echo e($item); ?>)">
+                                                <i class="fa fa-edit mr-1"></i>
+                                            </a>
+
+
+                                            <a href="" wire:click.prevent="deleteConfirm(<?php echo e($item->id); ?>)">
+                                                <i class="fa fa-trash text-danger"></i>
+                                            </a>
+
+                                        </td>
+                                    </tr>
+                                    <!-- __BLOCK__ --><?php $__currentLoopData = $item->children; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <tr class="<?php if($showMore == $item->id): ?>  <?php else: ?> d-none <?php endif; ?>"
+                                            style="background-color:#f2eee4">
+                                            <td></td>
+                                            <td><?php echo e($key->name); ?></td>
+                                            <td><?php echo e($key->url); ?></td>
+                                            <td><?php echo e($key->created_at->diffForhumans()); ?></td>
+                                            <td>
+
+                                                <a href="" wire:click.prevent="editModule(<?php echo e($key); ?>)">
+                                                    <i class="fa fa-edit mr-1"></i>
+                                                </a>
+
+
+                                                <a href="" wire:click.prevent="deleteConfirm(<?php echo e($key->id); ?>)">
+                                                    <i class="fa fa-trash text-danger"></i>
+                                                </a>
+
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <!-- __ENDBLOCK__ -->
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                    <div>
+                                        <tr class="text-center">
+                                            <td colspan="5">No Data Found.</td>
+                                        </tr>
+                                    </div>
+                                <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer clearfix">
-
-
-
-
-
-
-
                             <?php if (isset($component)) { $__componentOriginal24bedf952d760e511713cfb1cb516c1c = $component; } ?>
 <?php $component = App\View\Components\Table\PerPage::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
 <?php $component->withName('table.per-page'); ?>
@@ -106,7 +170,7 @@
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\Table\PerPage::class))->getConstructor()): ?>
 <?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
 <?php endif; ?>
-<?php $component->withAttributes(['name' => 'perPage','wire:model' => 'perPage']); ?>
+<?php $component->withAttributes(['wire:model.live.debounce.150ms' => 'perPage']); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__componentOriginal24bedf952d760e511713cfb1cb516c1c)): ?>
@@ -139,12 +203,12 @@
                     </button>
                 </div>
                 <form autocomplete="off"
-                      wire:submit.prevent="">
+                      wire:submit="saveModule">
                     <div class="modal-body">
                         <div class="card-body">
                             <div wire:ignore class="form-group">
                                 <label for="module_id">Module</label>
-                                <select class="form-control <?php $__errorArgs = ['module_id'];
+                                <select class="module form-control <?php $__errorArgs = ['module_id'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -152,8 +216,13 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                        wire:model="state.module_id" required>
-                                    <option value=""></option>
+                                        wire:model="state.module_id">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+
                                 </select>
                                 <?php $__errorArgs = ['module_id'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -178,7 +247,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                       id="name" placeholder="Enter your name" wire:model.defer="state.name" required>
+                                       id="name" placeholder="Enter your name" wire:model="name" required>
                                 <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -241,4 +310,11 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
 </div>
+<?php $__env->startPush('js'); ?>
+    <script>
+        $(document).ready(function () {
+            $('.module').select2();
+        });
+    </script>
+<?php $__env->stopPush(); ?>
 <?php /**PATH D:\laragon\www\livewire3\resources\views/livewire/backend/module/module-list-component.blade.php ENDPATH**/ ?>

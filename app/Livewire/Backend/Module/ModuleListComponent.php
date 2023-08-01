@@ -13,7 +13,7 @@ class ModuleListComponent extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $name;
+    public $name, $url, $sort_order, $parent_id;
     public $showMore = 0;
 
     public function open($id)
@@ -33,7 +33,13 @@ class ModuleListComponent extends Component
 
     public function saveModule()
     {
-        dd($this->name);
+        $module = Module::create([
+            'name' => $this->name,
+            'parent_id' => 0,
+            'slug' => 'slug',
+            'url' => 'url',
+            'sort_order' => $this->sort_order
+        ]);
     }
 
     public function render()

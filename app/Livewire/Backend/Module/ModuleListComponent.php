@@ -19,8 +19,8 @@ class ModuleListComponent extends Component
 
     public $name, $url, $sort_order, $parent_id;
     public $showMore = 0;
-    //public ModuleForm $form;
-    public $form = [];
+    public ModuleForm $form;
+    //public $form = [];
 
     public function open($id)
     {
@@ -47,15 +47,15 @@ class ModuleListComponent extends Component
         //     'url' => 'required',
         //     'icon' => 'required',
         // ])->validate();
-        //$this->form->store();
-        Module::create([
-            'name' => $this->form['name'],
-            'slug' => Str::slug(Str::singular($this->form['name'])),
-            'sort_order' => $this->form['sort_order'],
-            'is_active' => $this->form['is_active'],
-            'url' => $this->form['url'],
-            'icon' => $this->form['icon']
-        ]);
+        $this->form->store();
+        // Module::create([
+        //     'name' => $this->form['name'],
+        //     'slug' => Str::slug(Str::singular($this->form['name'])),
+        //     'sort_order' => $this->form['sort_order'],
+        //     'is_active' => $this->form['is_active'],
+        //     'url' => $this->form['url'],
+        //     'icon' => $this->form['icon']
+        // ]);
 
         $this->reset();
         $this->dispatch('hide-form');

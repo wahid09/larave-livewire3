@@ -161,48 +161,60 @@
                         </div>
                         <div class="card-body">
                             <form autocomplete="off"
-                                wire:submit="saveModule" class="form-inline">
+                                wire:submit="saveModule">
                                 <div class="modal-body">
                                     <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="name">Module Name</label>
-                                            <input type="text" class="form-control @error('form.name') is-invalid @enderror"
-                                                id="name" placeholder="Enter Module name" wire:model="form.name">
-                                            @error('form.name')
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                <label for="name">Module Name</label>
+                                                <input type="text" class="form-control @error('form.name') is-invalid @enderror"
+                                                    id="name" placeholder="Enter Module name" wire:model="form.name">
+                                                @error('form.name')
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                <label for="url">URL</label>
+                                                <input type="text" class="form-control @error('form.url') is-invalid @enderror"
+                                                    id="url" placeholder="Enter url" wire:model="form.url">
+                                                @error('form.url')
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="url">URL</label>
-                                            <input type="text" class="form-control @error('form.url') is-invalid @enderror"
-                                                id="url" placeholder="Enter url" wire:model="form.url">
-                                            @error('form.url')
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="url">Icon</label>
-                                            <input type="text" class="form-control @error('form.icon') is-invalid @enderror"
-                                                id="url" placeholder="Enter url" wire:model="form.icon">
-                                            @error('form.icon')
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="sort_order">Sort Order</label>
-                                            <input type="number" class="form-control @error('form.sort_order') is-invalid @enderror"
-                                                id="sort_order" placeholder="Enter url" wire:model="form.sort_order">
-                                            @error('form.ort_order')
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="url">Icon</label>
+                                                    <input type="text" class="form-control @error('form.icon') is-invalid @enderror"
+                                                        id="url" placeholder="Enter url" wire:model="form.icon">
+                                                    @error('form.icon')
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="sort_order">Sort Order</label>
+                                                    <input type="number" class="form-control @error('form.sort_order') is-invalid @enderror"
+                                                        id="sort_order" placeholder="Enter url" wire:model="form.sort_order">
+                                                    @error('form.ort_order')
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div> 
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-switch">

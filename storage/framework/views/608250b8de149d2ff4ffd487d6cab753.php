@@ -190,12 +190,14 @@
                         </div>
                         <div class="card-body">
                             <form autocomplete="off"
-                                wire:submit="saveModule" class="form-inline">
+                                wire:submit="saveModule">
                                 <div class="modal-body">
                                     <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="name">Module Name</label>
-                                            <input type="text" class="form-control <?php $__errorArgs = ['form.name'];
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                <label for="name">Module Name</label>
+                                                <input type="text" class="form-control <?php $__errorArgs = ['form.name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -203,23 +205,53 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                                id="name" placeholder="Enter Module name" wire:model="form.name">
-                                            <!-- __BLOCK__ --><?php $__errorArgs = ['form.name'];
+                                                    id="name" placeholder="Enter Module name" wire:model="form.name">
+                                                <!-- __BLOCK__ --><?php $__errorArgs = ['form.name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong><?php echo e($message); ?></strong>
-                                            </span>
-                                            <?php unset($message);
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><?php echo e($message); ?></strong>
+                                                </span>
+                                                <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?> <!-- __ENDBLOCK__ -->
+                                            </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                <label for="url">URL</label>
+                                                <input type="text" class="form-control <?php $__errorArgs = ['form.url'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                                    id="url" placeholder="Enter url" wire:model="form.url">
+                                                <!-- __BLOCK__ --><?php $__errorArgs = ['form.url'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong><?php echo e($message); ?></strong>
+                                                </span>
+                                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?> <!-- __ENDBLOCK__ -->
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="url">URL</label>
-                                            <input type="text" class="form-control <?php $__errorArgs = ['form.url'];
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="url">Icon</label>
+                                                    <input type="text" class="form-control <?php $__errorArgs = ['form.icon'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -227,23 +259,25 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                                id="url" placeholder="Enter url" wire:model="form.url">
-                                            <!-- __BLOCK__ --><?php $__errorArgs = ['form.url'];
+                                                        id="url" placeholder="Enter url" wire:model="form.icon">
+                                                    <!-- __BLOCK__ --><?php $__errorArgs = ['form.icon'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong><?php echo e($message); ?></strong>
-                                            </span>
-                                            <?php unset($message);
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong><?php echo e($message); ?></strong>
+                                                    </span>
+                                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?> <!-- __ENDBLOCK__ -->
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="url">Icon</label>
-                                            <input type="text" class="form-control <?php $__errorArgs = ['form.icon'];
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="sort_order">Sort Order</label>
+                                                    <input type="number" class="form-control <?php $__errorArgs = ['form.sort_order'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -251,43 +285,21 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                                id="url" placeholder="Enter url" wire:model="form.icon">
-                                            <!-- __BLOCK__ --><?php $__errorArgs = ['form.icon'];
+                                                        id="sort_order" placeholder="Enter url" wire:model="form.sort_order">
+                                                    <!-- __BLOCK__ --><?php $__errorArgs = ['form.ort_order'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong><?php echo e($message); ?></strong>
-                                            </span>
-                                            <?php unset($message);
+                                                    <span class="invalid-feedback" role="alert">
+                                                    <strong><?php echo e($message); ?></strong>
+                                                    </span>
+                                                    <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?> <!-- __ENDBLOCK__ -->
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="sort_order">Sort Order</label>
-                                            <input type="number" class="form-control <?php $__errorArgs = ['form.sort_order'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>"
-                                                id="sort_order" placeholder="Enter url" wire:model="form.sort_order">
-                                            <!-- __BLOCK__ --><?php $__errorArgs = ['form.ort_order'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                            <span class="invalid-feedback" role="alert">
-                                            <strong><?php echo e($message); ?></strong>
-                                            </span>
-                                            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?> <!-- __ENDBLOCK__ -->
+                                                </div>
+                                            </div> 
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-switch">

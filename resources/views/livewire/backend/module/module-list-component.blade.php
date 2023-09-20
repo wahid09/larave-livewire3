@@ -160,7 +160,7 @@
     <!-- /.content -->
     <!-- /.content-wrapper -->
 
-    <div class="modal fade" id="form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    <div class="modal fade" id="form" tabindex="" aria-labelledby="exampleModalLabel" aria-hidden="true"
          wire:ignore.self>
         <div class="modal-dialog">
             <div class="modal-content">
@@ -177,9 +177,9 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="name">Module Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                       id="name" placeholder="Enter Module name" wire:model="name" required>
-                                @error('name')
+                                <input type="text" class="form-control @error('form.name') is-invalid @enderror"
+                                       id="name" placeholder="Enter Module name" wire:model="form.name">
+                                @error('form.name')
                                 <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                                 </span>
@@ -187,9 +187,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="url">URL</label>
-                                <input type="text" class="form-control @error('url') is-invalid @enderror"
-                                       id="url" placeholder="Enter url" wire:model="url" required>
-                                @error('url')
+                                <input type="text" class="form-control @error('form.url') is-invalid @enderror"
+                                       id="url" placeholder="Enter url" wire:model="form.url">
+                                @error('form.url')
                                 <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                                 </span>
@@ -197,9 +197,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="sort_order">Sort Order</label>
-                                <input type="number" class="form-control @error('sort_order') is-invalid @enderror"
-                                       id="sort_order" placeholder="Enter url" wire:model="sort_order" required>
-                                @error('sort_order')
+                                <input type="number" class="form-control @error('form.sort_order') is-invalid @enderror"
+                                       id="sort_order" placeholder="Enter url" wire:model="form.sort_order">
+                                @error('form.ort_order')
                                 <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                                 </span>
@@ -208,12 +208,12 @@
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox"
-                                           class="custom-control-input @error('is_active') is-invalid @enderror"
+                                           class="custom-control-input @error('form.is_active') is-invalid @enderror"
                                            id="is_active"
-                                           wire:model.defer="state.is_active">
+                                           wire:model.defer="form.is_active">
                                     <label class="custom-control-label" for="is_active">Status</label>
                                 </div>
-                                @error('is_active')
+                                @error('form.is_active')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                     </span>
@@ -240,6 +240,9 @@
             </div>
         </div>
     </div>
+
+    
+    
 </div>
 @push('js')
     <script>

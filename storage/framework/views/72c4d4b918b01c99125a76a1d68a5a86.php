@@ -82,7 +82,7 @@
                                 </tr>
                                 </thead>
                                 <tbody wire:loading.class="text-muted">
-                                <?php $__empty_1 = true; $__currentLoopData = $modules; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                                <!-- __BLOCK__ --><?php $__empty_1 = true; $__currentLoopData = $modules; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                                     <tr data-widget="expandable-table" aria-expanded="false">
                                         <td class="align-middle">
                                             <!-- __BLOCK__ --><?php if($showMore == 0): ?>
@@ -150,13 +150,13 @@
                                             </td>
                                         </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> <!-- __ENDBLOCK__ -->
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                                <!-- __BLOCK__ --><?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                                     <div>
                                         <tr class="text-center">
                                             <td colspan="5">No Data Found.</td>
                                         </tr>
                                     </div>
-                                <?php endif; ?>
+                                <?php endif; ?> <!-- __ENDBLOCK__ -->
                                 </tbody>
                             </table>
                         </div>
@@ -191,7 +191,7 @@
     <!-- /.content -->
     <!-- /.content-wrapper -->
 
-    <div class="modal fade" id="form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    <div class="modal fade" id="form" tabindex="" aria-labelledby="exampleModalLabel" aria-hidden="true"
          wire:ignore.self>
         <div class="modal-dialog">
             <div class="modal-content">
@@ -208,7 +208,7 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="name">Module Name</label>
-                                <input type="text" class="form-control <?php $__errorArgs = ['name'];
+                                <input type="text" class="form-control <?php $__errorArgs = ['form.name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -216,8 +216,8 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                       id="name" placeholder="Enter Module name" wire:model="name" required>
-                                <?php $__errorArgs = ['name'];
+                                       id="name" placeholder="Enter Module name" wire:model="form.name">
+                                <!-- __BLOCK__ --><?php $__errorArgs = ['form.name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -228,11 +228,11 @@ $message = $__bag->first($__errorArgs[0]); ?>
                                 <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>
+unset($__errorArgs, $__bag); ?> <!-- __ENDBLOCK__ -->
                             </div>
                             <div class="form-group">
                                 <label for="url">URL</label>
-                                <input type="text" class="form-control <?php $__errorArgs = ['url'];
+                                <input type="text" class="form-control <?php $__errorArgs = ['form.url'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -240,8 +240,8 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                       id="url" placeholder="Enter url" wire:model="url" required>
-                                <?php $__errorArgs = ['url'];
+                                       id="url" placeholder="Enter url" wire:model="form.url">
+                                <!-- __BLOCK__ --><?php $__errorArgs = ['form.url'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -252,11 +252,11 @@ $message = $__bag->first($__errorArgs[0]); ?>
                                 <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>
+unset($__errorArgs, $__bag); ?> <!-- __ENDBLOCK__ -->
                             </div>
                             <div class="form-group">
                                 <label for="sort_order">Sort Order</label>
-                                <input type="number" class="form-control <?php $__errorArgs = ['sort_order'];
+                                <input type="number" class="form-control <?php $__errorArgs = ['form.sort_order'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -264,8 +264,8 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                       id="sort_order" placeholder="Enter url" wire:model="sort_order" required>
-                                <?php $__errorArgs = ['sort_order'];
+                                       id="sort_order" placeholder="Enter url" wire:model="form.sort_order">
+                                <!-- __BLOCK__ --><?php $__errorArgs = ['form.ort_order'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -276,12 +276,12 @@ $message = $__bag->first($__errorArgs[0]); ?>
                                 <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>
+unset($__errorArgs, $__bag); ?> <!-- __ENDBLOCK__ -->
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox"
-                                           class="custom-control-input <?php $__errorArgs = ['is_active'];
+                                           class="custom-control-input <?php $__errorArgs = ['form.is_active'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -290,10 +290,10 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
                                            id="is_active"
-                                           wire:model.defer="state.is_active">
+                                           wire:model.defer="form.is_active">
                                     <label class="custom-control-label" for="is_active">Status</label>
                                 </div>
-                                <?php $__errorArgs = ['is_active'];
+                                <!-- __BLOCK__ --><?php $__errorArgs = ['form.is_active'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -304,7 +304,7 @@ $message = $__bag->first($__errorArgs[0]); ?>
                                 <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>
+unset($__errorArgs, $__bag); ?> <!-- __ENDBLOCK__ -->
                             </div>
 
                             <div class="form-check">
@@ -326,6 +326,9 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </div>
     </div>
+
+    
+    
 </div>
 <?php $__env->startPush('js'); ?>
     <script>

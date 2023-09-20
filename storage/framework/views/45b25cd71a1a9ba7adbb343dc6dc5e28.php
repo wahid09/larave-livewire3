@@ -64,7 +64,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-
 <!-- jQuery -->
 <script src="<?php echo e(asset('backend/plugins/jquery/jquery.min.js')); ?>"></script>
 <!-- Bootstrap 4 -->
@@ -72,13 +71,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- AdminLTE App -->
 <script src="<?php echo e(asset('backend/dist/js/adminlte.min.js')); ?>"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script>
-    window.addEventListener('show-form', event => {
+<script data-navigate-once>
+    document.addEventListener('show-form', event => {
         $('#form').modal('show');
     });
-    window.addEventListener('hide-form', event => {
+    document.addEventListener('hide-form', event => {
         $('#form').modal('hide');
     });
+    document.addEventListener('livewire:navigated', () => { 
+        $(window.AdminLTEInit);
+})
 
 </script>
 <?php echo $__env->yieldPushContent('js'); ?>

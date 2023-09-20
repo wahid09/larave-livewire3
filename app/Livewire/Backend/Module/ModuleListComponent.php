@@ -8,6 +8,8 @@ use Livewire\WithPagination;
 use App\Traits\withDataTable;
 use App\Livewire\Forms\ModuleForm;
 use Livewire\Attributes\Computed;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ModuleListComponent extends Component
 {
@@ -17,7 +19,8 @@ class ModuleListComponent extends Component
 
     public $name, $url, $sort_order, $parent_id;
     public $showMore = 0;
-    public ModuleForm $form;
+    //public ModuleForm $form;
+    public $form = [];
 
     public function open($id)
     {
@@ -37,7 +40,24 @@ class ModuleListComponent extends Component
 
     public function saveModule()
     {
-        $this->form->store();
+        // $validatedData = Validator::make($this->form, [
+        //     'name' => 'required|min:3|max:255|unique:modules,name',
+        //     'sort_order' => 'required|unique:modules,sort_order',
+        //     'is_active' => 'required',
+        //     'url' => 'required',
+        //     'icon' => 'required',
+        // ])->validate();
+        //$this->form->store();
+        Module::create([
+            'name' => $this->form['name'],
+            'slug' => Str::slug(Str::singular($this->form['name'])),
+            'sort_order' => $this->form['sort_order'],
+            'is_active' => $this->form['is_active'],
+            'url' => $this->form['url'],
+            'icon' => $this->form['icon']
+        ]);
+
+        $this->reset();
         $this->dispatch('hide-form');
         $this->modules();
         return redirect()->back();

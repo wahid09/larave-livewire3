@@ -11,7 +11,7 @@ class ModuleForm extends Form
 {
     #[Rule('required|min:3')]
     public $name = '';
- 
+
     #[Rule('required|unique')]
     public $slug = '';
 
@@ -21,7 +21,7 @@ class ModuleForm extends Form
     #[Rule('required')]
     public $url = '';
 
-    public $is_active = true;
+    public $is_active = false;
 
     public function store()
     {
@@ -34,7 +34,6 @@ class ModuleForm extends Form
             "is_active" => $this->is_active
         ]);
 
-        $this->reset(); 
+        $this->reset();
     }
-
 }

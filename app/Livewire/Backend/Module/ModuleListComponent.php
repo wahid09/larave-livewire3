@@ -43,10 +43,12 @@ class ModuleListComponent extends Component
         return redirect()->back();
     }
 
-    #[Computed] 
-    public function modules(){
+    #[Computed]
+    public function modules()
+    {
         return Module::with('children')
             ->where('name', 'like', '%' . $this->searchTerm . '%')
+            ->where('parent_id', 0)
             ->orderBy('id', 'ASC')
             ->paginate($this->perPage);
     }
@@ -54,9 +56,9 @@ class ModuleListComponent extends Component
     public function render()
     {
         //$modules = Module::with('children')
-            //->where('name', 'like', '%' . $this->searchTerm . '%')
-            //->orderBy('id', 'ASC')
-            //->paginate($this->perPage);
+        //->where('name', 'like', '%' . $this->searchTerm . '%')
+        //->orderBy('id', 'ASC')
+        //->paginate($this->perPage);
         return view('livewire.backend.module.module-list-component', [
             'modules' => $this->modules
         ]);

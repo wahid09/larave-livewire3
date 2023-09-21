@@ -9,17 +9,17 @@ use Illuminate\Support\Str;
 
 class ModuleForm extends Form
 {
-    #[Rule('required|min:3')]
+    #[Rule('required|min:3|max:255|unique:modules,name')]
     public $name = '';
 
-    #[Rule('required|unique')]
-    public $slug = '';
-
-    #[Rule('required|numeric')]
+    #[Rule('required|unique:modules,sort_order')]
     public $sort_order = '';
 
     #[Rule('required')]
     public $url = '';
+
+    #[Rule('required')]
+    public $icon = '';
 
     public $is_active = false;
 

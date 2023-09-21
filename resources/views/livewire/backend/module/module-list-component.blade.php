@@ -20,13 +20,13 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Module List</h3>
-                            {{-- <button wire:click="addNewModule" class="btn btn-primary btn-sm float-right"><i
+                            <button wire:click="addNewModule" class="btn btn-primary btn-sm float-right"><i
                                     class="fa fa-plus-circle mr-1"></i> Add New
-                            </button> --}}
+                            </button>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -158,133 +158,139 @@
                     </div>
                     <!-- /.card -->
                 </div>
-                <div class="col-md-5">
-                    <div class="card card-warning">
-                        <div class="card-header">
-                            <h3 class="card-title">General Elements</h3>
-                        </div>
-
-                        <div class="card-body">
-                            <form>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="name">Module Name</label>
-                                            <input type="text"
-                                                class="form-control @error('form.name') is-invalid @enderror"
-                                                id="name" placeholder="Enter Module name" wire:model="form.name">
-                                            @error('form.name')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="url">URL</label>
-                                            <input type="text"
-                                                class="form-control @error('form.url') is-invalid @enderror"
-                                                id="url" placeholder="Enter url" wire:model="form.url">
-                                            @error('form.url')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="url">Icon</label>
-                                            <input type="text"
-                                                class="form-control @error('form.icon') is-invalid @enderror"
-                                                id="url" placeholder="Enter url" wire:model="form.icon">
-                                            @error('form.icon')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="sort_order">Sort Order</label>
-                                            <input type="number"
-                                                class="form-control @error('form.sort_order') is-invalid @enderror"
-                                                id="sort_order" placeholder="Enter url" wire:model="form.sort_order">
-                                            @error('form.ort_order')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox"
-                                            class="custom-control-input @error('form.is_active') is-invalid @enderror"
-                                            id="is_active" wire:model.defer="form.is_active">
-                                        <label class="custom-control-label" for="is_active">Status</label>
-                                    </div>
-                                    @error('form.is_active')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-check">
-                                    {{-- <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                    <label class="form-check-label" for="exampleCheck1">Check me out</label> --}}
-                                    {{-- <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch> --}}
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 float-left">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
-                                                class="fa fa-times mr-1"></i>Cancel
-                                        </button>
-                                        <button type="submit" class="btn btn-primary"><i
-                                                class="fa fa-save mr-1"></i>Save
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Add New Module</h3>
-                        </div>
-                        <div class="card-body">
-                            <form autocomplete="off" wire:submit="saveModule">
-                                <div class="modal-body">
-                                    <div class="card-body">
-
-                                    </div>
-                                    <!-- /.card-body -->
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
-                                            class="fa fa-times mr-1"></i>Cancel
-                                    </button>
-                                    <button type="submit" class="btn btn-primary"><i
-                                            class="fa fa-save mr-1"></i>Save
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
     <!-- /.content-wrapper -->
+
+    <div class="modal fade" id="form" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+         wire:ignore.self>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ ($showEditModal) ? 'Edit' : 'Create' }}
+                        Module</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form autocomplete="off" wire:submit="{{ $showEditModal ? 'updateModule' : 'createModule'}}">
+                    <div class="modal-body">
+                        <div class="card-body">
+                            @if($subModule)
+                                <div class="form-group">
+                                    <label for="name">Submodule Name *</label>
+                                    <input type="text"
+                                           class="form-control @error('form.name') is-invalid @enderror"
+                                           id="name" placeholder="Enter submodule name" wire:model.live="form.name">
+                                    @error('form.name')
+                                    <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                                    @enderror
+                                </div>
+                            @else
+                                <div class="form-group">
+                                    <label for="name">Module Name *</label>
+                                    <input type="text"
+                                           class="form-control @error('form.name') is-invalid @enderror"
+                                           id="name" placeholder="Enter module name" wire:model.live="form.name">
+                                    @error('form.name')
+                                    <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                                    @enderror
+                                </div>
+                            @endif
+                            @if($subModule)
+                                <div class="form-group">
+                                    <label for="name">URL *</label>
+                                    <input type="text"
+                                           class="form-control @error('form.url') is-invalid @enderror"
+                                           id="name"
+                                           placeholder="Module name(singular)/sub module name plural(e.g dev-consol/permissions)"
+                                           wire:model="form.url">
+                                    @error('form.url')
+                                    <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                                    @enderror
+                                </div>
+                            @else
+                                <div class="form-group">
+                                    <label for="name">URL *</label>
+                                    <input type="text"
+                                           class="form-control @error('form.url') is-invalid @enderror"
+                                           id="name"
+                                           placeholder="Enter Module Name(e.g dev-console)"
+                                           wire:model.lazy="form.url">
+                                    @error('form.url')
+                                    <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                                    @enderror
+                                </div>
+                            @endif
+                            <div class="form-group">
+                                <label for="name">Order *</label>
+                                <input type="number"
+                                       class="form-control @error('form.sort_order') is-invalid @enderror"
+                                       id="name" placeholder="Enter Order" wire:model.live="form.sort_order">
+                                @error('form.sort_order')
+                                <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Icon *</label>
+                                <input type="text"
+                                       class="form-control @error('form.icon') is-invalid @enderror"
+                                       id="name" placeholder="Enter icon (e.g fa fa-user)" wire:model="form.icon">
+                                @error('form.icon')
+                                <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox"
+                                           class="custom-control-input @error('form.is_active') is-invalid @enderror"
+                                           id="is_active"
+                                           wire:model.lazy="form.is_active" @isset($service) {{ $service->is_active==true ? 'checked' : ''}} @endisset>
+                                    <label class="custom-control-label" for="is_active">Status *</label>
+                                </div>
+                                @error('form.is_active')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-check">
+                                {{-- <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Check me out</label> --}}
+                                {{-- <input type="checkbox" name="my-checkbox" checked data-bootstrap-switch> --}}
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                                class="fa fa-times mr-1"></i>Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary"><i
+                                class="fa fa-save mr-1"></i>{{ ($showEditModal) ? 'Update' : 'Save' }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 @push('js')
     <script>

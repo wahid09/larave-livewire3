@@ -88,4 +88,4 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 </body>
 </html>
-<?php /**PATH D:\laragon\www\larave-livewire3\resources\views/backend/layouts/app.blade.php ENDPATH**/ ?>
+<?php /**PATH /Users/user/Herd/livewire3/resources/views/backend/layouts/app.blade.php ENDPATH**/ ?>

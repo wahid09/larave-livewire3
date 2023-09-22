@@ -96,39 +96,39 @@ class PermissionSeeder extends Seeder
             'icon' => 'fas fa-copy'
         ]);
 
-        Permission::updateOrCreate([
-            'module_id' => $ModuleAccessControl->id,
-            'name' => 'Access Control Index',
-            'slug' => 'access-control-index'
-        ]);
-        $moduleUser = Module::updateOrCreate([
-            'name' => 'Users',
-            'parent_id' => $ModuleAccessControl->id,
-            'sort_order' => 5,
-            'slug' => 'user',
-            'url' => 'access-control/users',
-            'icon' => 'fa fa-user'
-        ]);
-        Permission::updateOrCreate([
-            'module_id' => $moduleUser->id,
-            'name' => 'User Index',
-            'slug' => 'user-index'
-        ]);
-        Permission::updateOrCreate([
-            'module_id' => $moduleUser->id,
-            'name' => 'User Create',
-            'slug' => 'user-create'
-        ]);
-        Permission::updateOrCreate([
-            'module_id' => $moduleUser->id,
-            'name' => 'User Update',
-            'slug' => 'user-update'
-        ]);
-        Permission::updateOrCreate([
-            'module_id' => $moduleUser->id,
-            'name' => 'User Delete',
-            'slug' => 'user-delete'
-        ]);
+        // Permission::updateOrCreate([
+        //     'module_id' => $ModuleAccessControl->id,
+        //     'name' => 'Access Control Index',
+        //     'slug' => 'access-control-index'
+        // ]);
+        // $moduleUser = Module::updateOrCreate([
+        //     'name' => 'Users',
+        //     'parent_id' => $ModuleAccessControl->id,
+        //     'sort_order' => 5,
+        //     'slug' => 'user',
+        //     'url' => 'access-control/users',
+        //     'icon' => 'fa fa-user'
+        // ]);
+        // Permission::updateOrCreate([
+        //     'module_id' => $moduleUser->id,
+        //     'name' => 'User Index',
+        //     'slug' => 'user-index'
+        // ]);
+        // Permission::updateOrCreate([
+        //     'module_id' => $moduleUser->id,
+        //     'name' => 'User Create',
+        //     'slug' => 'user-create'
+        // ]);
+        // Permission::updateOrCreate([
+        //     'module_id' => $moduleUser->id,
+        //     'name' => 'User Update',
+        //     'slug' => 'user-update'
+        // ]);
+        // Permission::updateOrCreate([
+        //     'module_id' => $moduleUser->id,
+        //     'name' => 'User Delete',
+        //     'slug' => 'user-delete'
+        // ]);
 
         //Access Log
         $moduleAccessLog = Module::updateOrCreate([

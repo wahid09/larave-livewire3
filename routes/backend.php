@@ -7,7 +7,10 @@ use App\Livewire\DevConsole\DataImport;
 use App\Livewire\LoginRecord\LoginRecordList;
 use App\Livewire\Permission\PermissionList;
 use App\Livewire\Rank\RankList;
+use App\Livewire\Role\RoleCreate;
 use App\Livewire\Role\RoleList;
+use App\Livewire\Role\RoleUpdate;
+use App\Livewire\UserMgt\UserList;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', DashboardController::class)->name('dashboard');
@@ -17,6 +20,8 @@ Route::get('dev-console/data-imports', DataImport::class)->name('dev-console/dat
 
 //Role
 Route::get('/dev-console/roles', RoleList::class)->name('dev-console/roles');
+Route::get('/dev-console/role/create', RoleCreate::class)->name('role.create');
+Route::get('/dev-console/role/{role}/edit', RoleUpdate::class)->name('role.edit');
 
 //Permission
 Route::get('/dev-console/permissions', PermissionList::class)->name('dev-console/permissions');
@@ -30,3 +35,6 @@ Route::get('access-control/login-records', LoginRecordList::class)->name('access
 
 //Rank
 Route::get('application-setup/ranks', RankList::class)->name('application-setup/ranks');
+
+//User Management
+Route::get('user-management/user-infos', UserList::class)->name('user-management/user-infos');

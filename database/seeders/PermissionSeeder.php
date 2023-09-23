@@ -57,6 +57,50 @@ class PermissionSeeder extends Seeder
             'name' => 'Role Delete',
             'slug' => 'role-delete'
         ]);
+        //User information
+        $moduleUserInfo = Module::updateOrCreate([
+            'name' => 'User Management',
+            'parent_id' => 0,
+            'sort_order' => 45,
+            'slug' => 'user-management',
+            'url' => 'user-management',
+            'icon' => 'fas fa-users'
+        ]);
+
+        Permission::updateOrCreate([
+            'module_id' => $moduleUserInfo->id,
+            'name' => 'user management Index',
+            'slug' => 'user-management-index'
+        ]);
+
+        $moduleuser = Module::updateOrCreate([
+            'name' => 'User Mgt',
+            'parent_id' => $moduleUserInfo->id,
+            'sort_order' => 46,
+            'slug' => 'user-mgt',
+            'url' => 'user-management/user-mgt',
+            'icon' => 'fas fa-user'
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleuser->id,
+            'name' => 'User Index',
+            'slug' => 'user-index'
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleuser->id,
+            'name' => 'User Create',
+            'slug' => 'user-create'
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleuser->id,
+            'name' => 'User Update',
+            'slug' => 'user-update'
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleuser->id,
+            'name' => 'User Delete',
+            'slug' => 'user-delete'
+        ]);
         //Data Import
         $moduleDataImport = Module::updateOrCreate([
             'name' => 'Data Import',

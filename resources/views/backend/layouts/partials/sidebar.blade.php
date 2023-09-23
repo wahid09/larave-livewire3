@@ -14,45 +14,13 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                <li class="nav-item">
-                <a href="{{ route('app.dashboard') }}" class="nav-link {{ request()->is('app/dashboard') ? 'active' : '' }}">
+                <a wire:navigate href="{{ route('app.dashboard') }}" class="nav-link {{ request()->is('app/dashboard') ? 'active' : '' }}">
                   <i class="nav-icon fas fa-home"></i>
                   <p>
                     Dashboard
                   </p>
                 </a>
               </li>
-
-              {{-- <li class="nav-item has-treeview customLiClass">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon far fa-envelope"></i>
-                  <p>
-                    Access Control
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  @permission('user-index')
-                  <li class="nav-item">
-                    <a href="{{ route('app.users') }}" class="nav-link">
-                      <i class="fas fa-users nav-icon"></i>
-                      <p>Users</p>
-                    </a>
-                  </li>
-                  @endpermission
-                  <li class="nav-item">
-                    <a href="pages/mailbox/compose.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Compose</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="pages/mailbox/read-mail.html" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Read</p>
-                    </a>
-                  </li>
-                </ul>
-              </li> --}}
               @foreach (getSidebar() as $mainMenu)
                   @permission($mainMenu->slug.'-index')
               <li class="nav-item has-treeview {{ request()->segment(2) == $mainMenu->url ? 'menu-open' : '' }}">
@@ -67,7 +35,7 @@
                   @foreach($mainMenu->children as $submenu)
                   @permission($submenu->slug.'-index')
                   <li class="nav-item">
-                    <a href="{{ route('app.'.$submenu->url) }}" class="nav-link {{ request()->is('app/'.$submenu->url) ? 'active' : '' }}">
+                    <a wire:navigate href="{{ route('app.'.$submenu->url) }}" class="nav-link {{ request()->is('app/'.$submenu->url) ? 'active' : '' }}">
                       <i class="{{ $submenu->icon }} nav-icon"></i>
                       <p>{{ $submenu->name }}</p>
                     </a>

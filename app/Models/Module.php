@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Permission;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Module extends Model
 {
@@ -12,6 +13,10 @@ class Module extends Model
 
     protected $guarded = ['id'];
 
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class);
+    }
     public function parent()
     {
         return $this->hasOne('App\Models\Module', 'id', 'parent_id')->orderBy('sort_order', 'asc');

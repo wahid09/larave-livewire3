@@ -4,6 +4,7 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,11 +12,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('backend/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('backend/dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/plugins/toastr/toastr.min.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         .content-header {
@@ -30,58 +32,75 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @stack('css')
     @livewireStyles
 </head>
+
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+    <div class="wrapper">
 
-    <!-- Navbar -->
-@include('backend.layouts.partials.navbar')
-<!-- /.navbar -->
+        <!-- Navbar -->
+        @include('backend.layouts.partials.navbar')
+        <!-- /.navbar -->
 
-    <!-- Main Sidebar Container -->
-@include('backend.layouts.partials.sidebar')
+        <!-- Main Sidebar Container -->
+        @include('backend.layouts.partials.sidebar')
 
-<!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        {{ $slot }}
-    </div>
-    <!-- /.content-wrapper -->
-
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-        <div class="p-3">
-            <h5>Title</h5>
-            <p>Sidebar content</p>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            {{ $slot }}
         </div>
-    </aside>
-    <!-- /.control-sidebar -->
+        <!-- /.content-wrapper -->
 
-    <!-- Main Footer -->
-    @include('backend.layouts.partials.footer')
-</div>
-<!-- ./wrapper -->
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+            <div class="p-3">
+                <h5>Title</h5>
+                <p>Sidebar content</p>
+            </div>
+        </aside>
+        <!-- /.control-sidebar -->
 
-<!-- REQUIRED SCRIPTS -->
-<!-- jQuery -->
-<script src="{{ asset('backend/plugins/jquery/jquery.min.js') }}"></script>
-<!-- Bootstrap 4 -->
-<script src="{{ asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<!-- AdminLTE App -->
-<script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script data-navigate-once>
-    document.addEventListener('show-form', event => {
-        $('#form').modal('show');
-    });
-    document.addEventListener('hide-form', event => {
-        $('#form').modal('hide');
-    });
-    document.addEventListener('livewire:navigated', () => { 
-        $(window.AdminLTEInit);
-})
+        <!-- Main Footer -->
+        @include('backend.layouts.partials.footer')
+    </div>
+    <!-- ./wrapper -->
 
-</script>
-@stack('js')
-@livewireScripts
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="{{ asset('backend/plugins/jquery/jquery.min.js') }}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script data-navigate-once>
+        $(document).ready(function() {
+            toastr.options = {
+                "progressBar": true,
+                "positionClass": "toast-top-right"
+            }
+            window.addEventListener('toastr-success', event => {
+                toastr.success(event.detail.message, 'Success');
+            });
+            window.addEventListener('toastr-info', event => {
+                toastr.info(event.detail.message, 'Info');
+            });
+            window.addEventListener('toastr-error', event => {
+                toastr.error(event.detail.message, 'Error');
+            });
+        });
+        document.addEventListener('show-form', event => {
+            $('#form').modal('show');
+        });
+        document.addEventListener('hide-form', event => {
+            $('#form').modal('hide');
+        });
+        document.addEventListener('livewire:navigated', () => {
+            $(window.AdminLTEInit);
+        })
+    </script>
+    @stack('js')
+    @livewireScripts
 </body>
+
 </html>

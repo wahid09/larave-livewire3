@@ -14,15 +14,13 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                <li class="nav-item">
-                <a href="<?php echo e(route('app.dashboard')); ?>" class="nav-link <?php echo e(request()->is('app/dashboard') ? 'active' : ''); ?>">
+                <a wire:navigate href="<?php echo e(route('app.dashboard')); ?>" class="nav-link <?php echo e(request()->is('app/dashboard') ? 'active' : ''); ?>">
                   <i class="nav-icon fas fa-home"></i>
                   <p>
                     Dashboard
                   </p>
                 </a>
               </li>
-
-              
               <?php $__currentLoopData = getSidebar(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $mainMenu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                   <?php if (\Illuminate\Support\Facades\Blade::check('permission', $mainMenu->slug.'-index')): ?>
               <li class="nav-item has-treeview <?php echo e(request()->segment(2) == $mainMenu->url ? 'menu-open' : ''); ?>">
@@ -38,7 +36,7 @@
                   <?php $__currentLoopData = $mainMenu->children; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $submenu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                   <?php if (\Illuminate\Support\Facades\Blade::check('permission', $submenu->slug.'-index')): ?>
                   <li class="nav-item">
-                    <a href="<?php echo e(route('app.'.$submenu->url)); ?>" class="nav-link <?php echo e(request()->is('app/'.$submenu->url) ? 'active' : ''); ?>">
+                    <a wire:navigate href="<?php echo e(route('app.'.$submenu->url)); ?>" class="nav-link <?php echo e(request()->is('app/'.$submenu->url) ? 'active' : ''); ?>">
                       <i class="<?php echo e($submenu->icon); ?> nav-icon"></i>
                       <p><?php echo e($submenu->name); ?></p>
                     </a>

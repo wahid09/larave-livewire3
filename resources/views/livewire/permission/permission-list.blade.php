@@ -97,12 +97,12 @@
                                         <td>{{ $item->created_at->diffForhumans() }}</td>
                                         <td>
                                             @permission('permission-update')
-                                            <a href="" wire:click.prevent="editPermission({{ $item }})">
+                                            <a href="" wire:click.prevent="editPermission({{ $item->id }})">
                                                 <i class="fa fa-edit mr-1"></i>
                                             </a>
                                             @endpermission
                                             @permission('permission-delete')
-                                            <a href="" wire:click.prevent="deleteConfirm({{ $item->id }})">
+                                            <a href="" wire:click.prevent="deleteConfirm({{ $item }})">
                                                 <i class="fa fa-trash text-danger"></i>
                                             </a>
                                             @endpermission
@@ -148,13 +148,13 @@
                     </button>
                 </div>
                 <form autocomplete="off"
-                      wire:submit.prevent="{{ $showEditModal ? 'updatePermission' : 'createPermission' }}">
+                      wire:submit="{{ $showEditModal ? 'updatePermission' : 'createPermission' }}">
                     <div class="modal-body">
                         <div class="card-body">
-                            <div wire:ignore class="form-group">
+                            <div class="form-group">
                                 <label for="module_id">Module</label>
                                 <select class="form-control @error('module_id') is-invalid @enderror"
-                                        wire:model="state.module_id" required id="module">
+                                        wire:model="module_id" id="module">
                                     <option value=""></option>
                                     @foreach($modules as $module)
                                         <option value="{{ $module->id }}">{{ $module->name }}</option>
@@ -166,10 +166,10 @@
                                 </span>
                                 @enderror
                             </div>
-                            <div class="form-group" wire:ignore>
+                            <div class="form-group">
                                 <label for="name">Permission Name</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                       id="name" placeholder="Enter your name" wire:model.defer="state.name" required>
+                                       id="name" placeholder="Enter permission name" wire:model="name">
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -181,7 +181,7 @@
                                     <input type="checkbox"
                                            class="custom-control-input @error('is_active') is-invalid @enderror"
                                            id="is_active"
-                                           wire:model.defer="state.is_active">
+                                           wire:model="is_active">
                                     <label class="custom-control-label" for="is_active">Status</label>
                                 </div>
                                 @error('is_active')

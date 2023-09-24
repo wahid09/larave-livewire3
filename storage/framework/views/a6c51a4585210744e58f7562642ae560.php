@@ -139,12 +139,12 @@
                                         <td><?php echo e($item->created_at->diffForhumans()); ?></td>
                                         <td>
                                             <!-- __BLOCK__ --><?php if (\Illuminate\Support\Facades\Blade::check('permission', 'permission-update')): ?>
-                                            <a href="" wire:click.prevent="editPermission(<?php echo e($item); ?>)">
+                                            <a href="" wire:click.prevent="editPermission(<?php echo e($item->id); ?>)">
                                                 <i class="fa fa-edit mr-1"></i>
                                             </a>
                                             <?php endif; ?> <!-- __ENDBLOCK__ -->
                                             <!-- __BLOCK__ --><?php if (\Illuminate\Support\Facades\Blade::check('permission', 'permission-delete')): ?>
-                                            <a href="" wire:click.prevent="deleteConfirm(<?php echo e($item->id); ?>)">
+                                            <a href="" wire:click.prevent="deleteConfirm(<?php echo e($item); ?>)">
                                                 <i class="fa fa-trash text-danger"></i>
                                             </a>
                                             <?php endif; ?> <!-- __ENDBLOCK__ -->
@@ -206,10 +206,10 @@
                     </button>
                 </div>
                 <form autocomplete="off"
-                      wire:submit.prevent="<?php echo e($showEditModal ? 'updatePermission' : 'createPermission'); ?>">
+                      wire:submit="<?php echo e($showEditModal ? 'updatePermission' : 'createPermission'); ?>">
                     <div class="modal-body">
                         <div class="card-body">
-                            <div wire:ignore class="form-group">
+                            <div class="form-group">
                                 <label for="module_id">Module</label>
                                 <select class="form-control <?php $__errorArgs = ['module_id'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -219,7 +219,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                        wire:model="state.module_id" required id="module">
+                                        wire:model="module_id" id="module">
                                     <option value=""></option>
                                     <!-- __BLOCK__ --><?php $__currentLoopData = $modules; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $module): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <option value="<?php echo e($module->id); ?>"><?php echo e($module->name); ?></option>
@@ -248,7 +248,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-                                       id="name" placeholder="Enter your name" wire:model.defer="state.name" required>
+                                       id="name" placeholder="Enter permission name" wire:model="name">
                                 <!-- __BLOCK__ --><?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -274,7 +274,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
                                            id="is_active"
-                                           wire:model.defer="state.is_active">
+                                           wire:model="is_active">
                                     <label class="custom-control-label" for="is_active">Status</label>
                                 </div>
                                 <!-- __BLOCK__ --><?php $__errorArgs = ['is_active'];
@@ -324,4 +324,4 @@ $(document).ready(function () {
         });
         </script>
 <?php $__env->stopPush(); ?>
-<?php /**PATH D:\laragon\www\larave-livewire3\resources\views/livewire/permission/permission-list.blade.php ENDPATH**/ ?>
+<?php /**PATH /Users/user/Herd/livewire3/resources/views/livewire/permission/permission-list.blade.php ENDPATH**/ ?>

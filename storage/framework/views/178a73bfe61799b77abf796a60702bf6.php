@@ -15,4 +15,4 @@
     <i class="fa fa-arrow-up <?php echo e($sortColumnName === $sortColumnName && $sortDirection === 'asc' ? '' : 'text-muted'); ?>"></i>
     <i class="fa fa-arrow-down <?php echo e($sortColumnName === $sortColumnName && $sortDirection === 'desc' ? '' : 'text-muted'); ?>"></i>
 </span>
-<?php /**PATH D:\laragon\www\larave-livewire3\resources\views/components/table/sort-by.blade.php ENDPATH**/ ?>
+<?php /**PATH /Users/user/Herd/livewire3/resources/views/components/table/sort-by.blade.php ENDPATH**/ ?>

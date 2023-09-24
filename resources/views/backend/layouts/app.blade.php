@@ -79,13 +79,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 "progressBar": true,
                 "positionClass": "toast-top-right"
             }
-            window.addEventListener('toastr-success', event => {
+            
+            document.addEventListener('toastr-success', event => {
                 toastr.success(event.detail.message, 'Success');
             });
-            window.addEventListener('toastr-info', event => {
+            document.addEventListener('toastr-info', event => {
                 toastr.info(event.detail.message, 'Info');
             });
-            window.addEventListener('toastr-error', event => {
+            document.addEventListener('toastr-error', event => {
                 toastr.error(event.detail.message, 'Error');
             });
         });
@@ -98,6 +99,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
         document.addEventListener('livewire:navigated', () => {
             $(window.AdminLTEInit);
         })
+        document.addEventListener('delete-confirm', event => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.livewire.emit('delete', event.detail.id);
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            }
+        })
+    });
     </script>
     @stack('js')
     @livewireScripts

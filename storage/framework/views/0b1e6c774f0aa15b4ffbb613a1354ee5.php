@@ -44,4 +44,4 @@
             </ul>
     <?php endif; ?> <!-- __ENDBLOCK__ -->
 </div>
-<?php /**PATH /Users/user/Herd/livewire3/resources/views/vendor/livewire/bootstrap.blade.php ENDPATH**/ ?>
+<?php /**PATH D:\laragon\www\larave-livewire3\resources\views/vendor/livewire/bootstrap.blade.php ENDPATH**/ ?>

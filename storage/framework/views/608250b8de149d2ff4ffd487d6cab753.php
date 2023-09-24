@@ -428,4 +428,4 @@ unset($__errorArgs, $__bag); ?> <!-- __ENDBLOCK__ -->
         });
     </script>
 <?php $__env->stopPush(); ?>
-<?php /**PATH /Users/user/Herd/livewire3/resources/views/livewire/backend/module/module-list-component.blade.php ENDPATH**/ ?>
+<?php /**PATH D:\laragon\www\larave-livewire3\resources\views/livewire/backend/module/module-list-component.blade.php ENDPATH**/ ?>

@@ -17,7 +17,7 @@ class PermissionSeeder extends Seeder
         $ModuleDevConsole = Module::updateOrCreate([
             'name' => 'Dev Console',
             'parent_id' => 0,
-            'sort_order' => 2,
+            'sort_order' => 1,
             'slug' => 'dev-console',
             'url' => 'dev-console',
             'icon' => 'fas fa-th'
@@ -32,7 +32,7 @@ class PermissionSeeder extends Seeder
         $moduleRole = Module::updateOrCreate([
             'name' => 'Roles',
             'parent_id' => $ModuleDevConsole->id,
-            'sort_order' => 3,
+            'sort_order' => 2,
             'slug' => 'role',
             'url' => 'dev-console/roles',
             'icon' => 'fas fa-columns'
@@ -61,7 +61,7 @@ class PermissionSeeder extends Seeder
         $moduleUserInfo = Module::updateOrCreate([
             'name' => 'User Management',
             'parent_id' => 0,
-            'sort_order' => 45,
+            'sort_order' => 3,
             'slug' => 'user-management',
             'url' => 'user-management',
             'icon' => 'fas fa-users'
@@ -69,43 +69,43 @@ class PermissionSeeder extends Seeder
 
         Permission::updateOrCreate([
             'module_id' => $moduleUserInfo->id,
-            'name' => 'user management Index',
+            'name' => 'User Management Index',
             'slug' => 'user-management-index'
         ]);
 
         $moduleuser = Module::updateOrCreate([
             'name' => 'User Mgt',
             'parent_id' => $moduleUserInfo->id,
-            'sort_order' => 46,
+            'sort_order' => 4,
             'slug' => 'user-mgt',
-            'url' => 'user-management/user-mgt',
+            'url' => 'user-management/user-mgts',
             'icon' => 'fas fa-user'
         ]);
         Permission::updateOrCreate([
             'module_id' => $moduleuser->id,
             'name' => 'User Index',
-            'slug' => 'user-index'
+            'slug' => 'user-mgt-index'
         ]);
         Permission::updateOrCreate([
             'module_id' => $moduleuser->id,
             'name' => 'User Create',
-            'slug' => 'user-create'
+            'slug' => 'user-mgt-create'
         ]);
         Permission::updateOrCreate([
             'module_id' => $moduleuser->id,
             'name' => 'User Update',
-            'slug' => 'user-update'
+            'slug' => 'user-mgt-update'
         ]);
         Permission::updateOrCreate([
             'module_id' => $moduleuser->id,
             'name' => 'User Delete',
-            'slug' => 'user-delete'
+            'slug' => 'user-mgt-delete'
         ]);
         //Data Import
         $moduleDataImport = Module::updateOrCreate([
             'name' => 'Data Import',
             'parent_id' => $ModuleDevConsole->id,
-            'sort_order' => 24,
+            'sort_order' => 5,
             'slug' => 'data-import',
             'url' => 'dev-console/data-imports',
             'icon' => 'fas fa-csv'
@@ -130,55 +130,70 @@ class PermissionSeeder extends Seeder
             'name' => 'Data Import delete',
             'slug' => 'data-import-delete'
         ]);
-        // User
+        // Access Control
         $ModuleAccessControl = Module::updateOrCreate([
             'name' => 'Access Control',
             'parent_id' => 0,
-            'sort_order' => 4,
+            'sort_order' => 6,
             'slug' => 'access-control',
             'url' => 'access-control',
             'icon' => 'fas fa-copy'
         ]);
 
-        // Permission::updateOrCreate([
-        //     'module_id' => $ModuleAccessControl->id,
-        //     'name' => 'Access Control Index',
-        //     'slug' => 'access-control-index'
-        // ]);
-        // $moduleUser = Module::updateOrCreate([
-        //     'name' => 'Users',
-        //     'parent_id' => $ModuleAccessControl->id,
-        //     'sort_order' => 5,
-        //     'slug' => 'user',
-        //     'url' => 'access-control/users',
-        //     'icon' => 'fa fa-user'
-        // ]);
-        // Permission::updateOrCreate([
-        //     'module_id' => $moduleUser->id,
-        //     'name' => 'User Index',
-        //     'slug' => 'user-index'
-        // ]);
-        // Permission::updateOrCreate([
-        //     'module_id' => $moduleUser->id,
-        //     'name' => 'User Create',
-        //     'slug' => 'user-create'
-        // ]);
-        // Permission::updateOrCreate([
-        //     'module_id' => $moduleUser->id,
-        //     'name' => 'User Update',
-        //     'slug' => 'user-update'
-        // ]);
-        // Permission::updateOrCreate([
-        //     'module_id' => $moduleUser->id,
-        //     'name' => 'User Delete',
-        //     'slug' => 'user-delete'
-        // ]);
+        Permission::updateOrCreate([
+            'module_id' => $ModuleAccessControl->id,
+            'name' => 'Access Control Index',
+            'slug' => 'access-control-index'
+        ]);
+        //Configuration
+        $ModuleConfiguration = Module::updateOrCreate([
+            'name' => 'Configuration',
+            'parent_id' => 0,
+            'sort_order' => 7,
+            'slug' => 'configuration',
+            'url' => 'configuration',
+            'icon' => 'fas fa-cogs'
+        ]);
+
+        Permission::updateOrCreate([
+            'module_id' => $ModuleConfiguration->id,
+            'name' => 'Configuration',
+            'slug' => 'configuration-index'
+        ]);
+        $moduleDivision = Module::updateOrCreate([
+            'name' => 'Division',
+            'parent_id' => $ModuleConfiguration->id,
+            'sort_order' => 8,
+            'slug' => 'division',
+            'url' => 'configuration/divisions',
+            'icon' => 'fa fa-copy'
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleDivision->id,
+            'name' => 'Division Index',
+            'slug' => 'division-index'
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleDivision->id,
+            'name' => 'Division Create',
+            'slug' => 'division-create'
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleDivision->id,
+            'name' => 'Division Update',
+            'slug' => 'division-update'
+        ]);
+        Permission::updateOrCreate([
+            'module_id' => $moduleDivision->id,
+            'name' => 'Division Delete',
+            'slug' => 'division-delete'
+        ]);
 
         //Access Log
         $moduleAccessLog = Module::updateOrCreate([
             'name' => 'Access Logs',
             'parent_id' => $ModuleAccessControl->id,
-            'sort_order' => 13,
+            'sort_order' => 9,
             'slug' => 'access-log',
             'url' => 'access-control/access-logs',
             'icon' => 'fa fa-book'
@@ -208,7 +223,7 @@ class PermissionSeeder extends Seeder
         $moduleLoginRecords = Module::updateOrCreate([
             'name' => 'Login Records',
             'parent_id' => $ModuleAccessControl->id,
-            'sort_order' => 14,
+            'sort_order' => 10,
             'slug' => 'login-record',
             'url' => 'access-control/login-records',
             'icon' => 'fa fa-clone'
@@ -264,7 +279,7 @@ class PermissionSeeder extends Seeder
         $moduleBackup = Module::updateOrCreate([
             'name' => 'Modules',
             'parent_id' => $ModuleDevConsole->id,
-            'sort_order' => 6,
+            'sort_order' => 11,
             'slug' => 'module',
             'url' => 'dev-console/modules',
             'icon' => 'fas fa-book'
@@ -294,7 +309,7 @@ class PermissionSeeder extends Seeder
         $moduleBackup = Module::updateOrCreate([
             'name' => 'Permissions',
             'parent_id' => $ModuleDevConsole->id,
-            'sort_order' => 7,
+            'sort_order' => 12,
             'slug' => 'permission',
             'url' => 'dev-console/permissions',
             'icon' => 'fa fa-address-card'
@@ -325,7 +340,7 @@ class PermissionSeeder extends Seeder
         $ModuleApplicationSetup = Module::updateOrCreate([
             'name' => 'Application Setup',
             'parent_id' => 0,
-            'sort_order' => 8,
+            'sort_order' => 13,
             'slug' => 'application-setup',
             'url' => 'application-setup',
             'icon' => 'fa fa-cog fa-fw'
@@ -340,7 +355,7 @@ class PermissionSeeder extends Seeder
         $moduleRank = Module::updateOrCreate([
             'name' => 'Ranks',
             'parent_id' => $ModuleApplicationSetup->id,
-            'sort_order' => 9,
+            'sort_order' => 14,
             'slug' => 'rank',
             'url' => 'application-setup/ranks',
             'icon' => 'fa fa-bars'

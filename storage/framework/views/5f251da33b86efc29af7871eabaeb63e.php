@@ -54,4 +54,4 @@
     </div>
     <!-- /.sidebar -->
   </aside>
-<?php /**PATH /Users/user/Herd/livewire3/resources/views/backend/layouts/partials/sidebar.blade.php ENDPATH**/ ?>
+<?php /**PATH D:\laragon\www\larave-livewire3\resources\views/backend/layouts/partials/sidebar.blade.php ENDPATH**/ ?>

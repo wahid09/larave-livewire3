@@ -132,4 +132,4 @@
         </a>
       </li>
     </ul>
-  </nav><?php /**PATH /Users/user/Herd/livewire3/resources/views/backend/layouts/partials/navbar.blade.php ENDPATH**/ ?>
+  </nav><?php /**PATH D:\laragon\www\larave-livewire3\resources\views/backend/layouts/partials/navbar.blade.php ENDPATH**/ ?>

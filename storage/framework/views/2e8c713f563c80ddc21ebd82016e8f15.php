@@ -5,4 +5,4 @@
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer><?php /**PATH /Users/user/Herd/livewire3/resources/views/backend/layouts/partials/footer.blade.php ENDPATH**/ ?>
+  </footer><?php /**PATH D:\laragon\www\larave-livewire3\resources\views/backend/layouts/partials/footer.blade.php ENDPATH**/ ?>

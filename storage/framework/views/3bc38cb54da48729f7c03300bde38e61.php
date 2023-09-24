@@ -8,4 +8,4 @@
         </button>
     </div>
 </div>
-<?php /**PATH /Users/user/Herd/livewire3/resources/views/components/table/live-search.blade.php ENDPATH**/ ?>
+<?php /**PATH D:\laragon\www\larave-livewire3\resources\views/components/table/live-search.blade.php ENDPATH**/ ?>

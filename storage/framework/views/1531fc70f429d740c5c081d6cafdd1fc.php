@@ -15,4 +15,4 @@
         margin-bottom: 0px;
     }
 </style>
-<?php /**PATH /Users/user/Herd/livewire3/resources/views/components/table/per-page.blade.php ENDPATH**/ ?>
+<?php /**PATH D:\laragon\www\larave-livewire3\resources\views/components/table/per-page.blade.php ENDPATH**/ ?>

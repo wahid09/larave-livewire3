@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Livewire\AccessLog\AccessLogList;
 use App\Livewire\Backend\Module\ModuleListComponent;
 use App\Livewire\DevConsole\DataImport;
+use App\Livewire\Division\DivisionList;
 use App\Livewire\LoginRecord\LoginRecordList;
 use App\Livewire\Permission\PermissionList;
 use App\Livewire\Rank\RankList;
@@ -37,4 +38,7 @@ Route::get('access-control/login-records', LoginRecordList::class)->name('access
 Route::get('application-setup/ranks', RankList::class)->name('application-setup/ranks');
 
 //User Management
-Route::get('user-management/user-infos', UserList::class)->name('user-management/user-infos');
+Route::get('user-management/user-mgts', UserList::class)->name('user-management/user-mgts');
+
+//Division
+Route::get('configuration/divisions', DivisionList::class)->name('configuration/divisions');

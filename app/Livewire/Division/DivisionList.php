@@ -9,6 +9,7 @@ use Livewire\Attributes\Computed;
 use Livewire\WithPagination;
 use App\Traits\withDataTable;
 use Auth;
+use Livewire\Attributes\Rule;
 
 class DivisionList extends Component
 {
@@ -18,7 +19,18 @@ class DivisionList extends Component
     public $showMore = 0;
     public $showEditModal = false, $subModule = false, $division;
 
-    public DivisionForm $form;
+    #[Rule('required|min:3|max:255')]
+    public $division_name = '';
+
+    #[Rule('required|min:2|max:10')]
+    public $division_code = '';
+
+    public $order = '';
+    public $parent_id = 0;
+    public $is_active = 0;
+    public $division_address = '';
+    public $created_by = '';
+    public $updated_by = '';
 
 
     public function open($id)
@@ -45,6 +57,7 @@ class DivisionList extends Component
     }
     public function addNewSubDivision(Division $division)
     {
+        $this->reset();
         $this->subModule = true;
         $this->showEditModal = false;
         $this->division = $division;
@@ -55,19 +68,28 @@ class DivisionList extends Component
         if ($this->subModule && $this->division) {
             $this->validate();
             Division::create([
-                "division_name" => $this->form->division_name,
+                "division_name" => $this->division_name,
                 'parent_id' => $this->division->id,
-                "division_code" => $this->form->division_code,
-                "order" => $this->form->order,
-                "division_address" => $this->form->division_address,
+                "division_code" => $this->division_code,
+                "order" => $this->order,
+                "division_address" => $this->division_address,
                 "created_by" => Auth::user()->id,
-                "is_active" => $this->form->is_active
+                "is_active" => $this->is_active
             ]);
             $this->dispatch('hide-form');
             $this->dispatch('toastr-success', ['message' => 'Unit Added Successfully']);
             return redirect()->back();
         } else {
-            $this->form->store();
+            $this->validate();
+            Division::create([
+                "division_name" => $this->division_name,
+                "division_code" => $this->division_code,
+                "order" => $this->order,
+                "division_address" => $this->division_address,
+                "created_by" => Auth::user()->id,
+                "is_active" => $this->is_active
+            ]);
+            $this->reset();
             $this->dispatch('hide-form');
             $this->dispatch('toastr-success', ['message' => 'Division Added Successfully']);
             return redirect()->back();
@@ -78,7 +100,42 @@ class DivisionList extends Component
         $this->subModule = false;
         $this->showEditModal = true;
         $this->division = $division;
+        $this->division_name = $this->division->division_name;
+        $this->division_code = $this->division->division_code;
+        $this->order = $this->division->order;
+        $this->division_address = $this->division->division_address;
+        $this->is_active = $this->division->is_active;
+        //dd($this->is_active);
         $this->dispatch('show-form');
+    }
+    public function editUnit(Division $division)
+    {
+        $this->subModule = false;
+        $this->showEditModal = true;
+        $this->division = $division;
+        $this->division_name = $this->division->division_name;
+        $this->division_code = $this->division->division_code;
+        $this->order = $this->division->order;
+        $this->division_address = $this->division->division_address;
+        $this->is_active = $this->division->is_active;
+        //dd($this->is_active);
+        $this->dispatch('show-form');
+    }
+    public function updateDivision()
+    {
+        $this->validate();
+        $this->division->update([
+            "division_name" => $this->division_name,
+            "division_code" => $this->division_code,
+            "order" => $this->order,
+            "division_address" => $this->division_address,
+            "created_by" => Auth::user()->id,
+            "is_active" => $this->is_active
+        ]);
+        $this->reset();
+        $this->dispatch('hide-form');
+        $this->dispatch('toastr-success', ['message' => 'Division Updated Successfully']);
+        return redirect()->back();
     }
     public function deleteConfirm($id)
     {

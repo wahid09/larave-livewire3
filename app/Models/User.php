@@ -55,6 +55,7 @@ class User extends Authenticatable
     {
         $this->attributes['updated_at'] = empty($date) ? Carbon::now() : Carbon::parse($date);
     }
+
     public function role()
     {
         return $this->belongsTo(Role::class);

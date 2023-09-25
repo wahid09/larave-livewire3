@@ -11,6 +11,7 @@ use App\Livewire\Rank\RankList;
 use App\Livewire\Role\RoleCreate;
 use App\Livewire\Role\RoleList;
 use App\Livewire\Role\RoleUpdate;
+use App\Livewire\UserMgt\UserCreate;
 use App\Livewire\UserMgt\UserList;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,7 @@ Route::get('application-setup/ranks', RankList::class)->name('application-setup/
 
 //User Management
 Route::get('user-management/user-mgts', UserList::class)->name('user-management/user-mgts');
+Route::get('user-management/user-mgts/create', UserCreate::class)->name('user.create');
 
 //Division
 Route::get('configuration/divisions', DivisionList::class)->name('configuration/divisions');

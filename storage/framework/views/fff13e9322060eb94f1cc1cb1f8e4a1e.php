@@ -14,11 +14,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="{{ asset('backend/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('backend/plugins/fontawesome-free/css/all.min.css')); ?>">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('backend/dist/css/adminlte.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('backend/plugins/toastr/toastr.min.css') }}">
-    <link href="{{ asset('backend/dist/css/select2.min.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="<?php echo e(asset('backend/dist/css/adminlte.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('backend/plugins/toastr/toastr.min.css')); ?>">
+    <link href="<?php echo e(asset('backend/dist/css/select2.min.css')); ?>" rel="stylesheet" />
     <style>
         .content-header {
             padding: 15px 0.5rem;
@@ -34,23 +34,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
     margin-top: -8px;
 }
     </style>
-    @stack('css')
-    @livewireStyles
+    <?php echo $__env->yieldPushContent('css'); ?>
+    <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::styles(); ?>
+
 </head>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
 
         <!-- Navbar -->
-        @include('backend.layouts.partials.navbar')
+        <?php echo $__env->make('backend.layouts.partials.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        @include('backend.layouts.partials.sidebar')
+        <?php echo $__env->make('backend.layouts.partials.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            {{ $slot }}
+            <?php echo e($slot); ?>
+
         </div>
         <!-- /.content-wrapper -->
 
@@ -65,19 +67,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.control-sidebar -->
 
         <!-- Main Footer -->
-        @include('backend.layouts.partials.footer')
+        <?php echo $__env->make('backend.layouts.partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </div>
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
     <!-- jQuery -->
-    <script src="{{ asset('backend/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="<?php echo e(asset('backend/plugins/jquery/jquery.min.js')); ?>"></script>
     <!-- Bootstrap 4 -->
-    <script src="{{ asset('backend/dist/js/select2.min.js') }}"></script>
-    <script src="{{ asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="<?php echo e(asset('backend/dist/js/select2.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js')); ?>"></script>
     <!-- AdminLTE App -->
-    <script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
-    <script src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
+    <script src="<?php echo e(asset('backend/dist/js/adminlte.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('backend/plugins/toastr/toastr.min.js')); ?>"></script>
     <script data-navigate-once>
         $(document).ready(function() {
             toastr.options = {
@@ -125,8 +127,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         })
     });
     </script>
-    @stack('js')
-    @livewireScripts
+    <?php echo $__env->yieldPushContent('js'); ?>
+    <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::scripts(); ?>
+
 </body>
 
 </html>
+<?php /**PATH D:\laragon\www\larave-livewire3\resources\views/backend/layouts/app.blade.php ENDPATH**/ ?>

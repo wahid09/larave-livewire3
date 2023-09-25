@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('division_name')->unique();
             $table->bigInteger('parent_id')->default(0);
             $table->string('division_code')->nullable();
-            $table->string('order')->unique()->nullable();
+            $table->string('order')->nullable();
             $table->text('division_address')->nullable();
             $table->boolean('is_active')->default(true);
             $table->softDeletes();

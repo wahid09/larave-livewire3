@@ -25,10 +25,10 @@ class PermissionList extends Component
     protected $queryString = ['searchTerm' => ['except' => '']];
 
     #[Rule('required')]
-    public $module_id='';
+    public $module_id = '';
 
     #[Rule('required|min:3|max:255')]
-    public $name='';
+    public $name = '';
     #[Rule('required')]
     #[Computed]
     public $is_active;
@@ -46,7 +46,8 @@ class PermissionList extends Component
         $this->showEditModal = false;
         $this->dispatch('show-form');
     }
-    public function createPermission(){
+    public function createPermission()
+    {
         $this->validate();
         Permission::create([
             "name" => $this->name,
@@ -59,7 +60,8 @@ class PermissionList extends Component
         $this->dispatch('toastr-success', ['message' => 'Permission Added Successfully']);
         return redirect()->back();
     }
-    public function editPermission(Permission $permission){
+    public function editPermission(Permission $permission)
+    {
         $this->permission = $permission;
         $this->name = $this->permission->name;
         $this->module_id = $this->permission->module_id;
@@ -67,7 +69,8 @@ class PermissionList extends Component
         $this->showEditModal = true;
         $this->dispatch('show-form');
     }
-    public function updatePermission(){
+    public function updatePermission()
+    {
         $this->validate();
         $this->permission->update([
             "name" => $this->name,
@@ -86,7 +89,8 @@ class PermissionList extends Component
             'id' => $id,
         ]);
     }
-    public function delete($permission){
+    public function delete($permission)
+    {
         $this->permission->delete();
     }
     public function render()

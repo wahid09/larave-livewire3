@@ -183,9 +183,9 @@
                                 <div class="form-group">
                                     <label for="name">Unit Name *</label>
                                     <input type="text"
-                                           class="form-control @error('form.division_name') is-invalid @enderror"
-                                           id="name" placeholder="Enter Unit name" wire:model="form.division_name">
-                                    @error('form.division_name')
+                                           class="form-control @error('division_name') is-invalid @enderror"
+                                           id="name" placeholder="Enter Unit name" wire:model="division_name">
+                                    @error('division_name')
                                     <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                                 </span>
@@ -195,9 +195,9 @@
                                 <div class="form-group">
                                     <label for="name">Division Name *</label>
                                     <input type="text"
-                                           class="form-control @error('form.division_name') is-invalid @enderror"
-                                           id="name" placeholder="Enter division name" wire:model="form.division_name">
-                                    @error('form.division_name')
+                                           class="form-control @error('division_name') is-invalid @enderror"
+                                           id="name" placeholder="Enter division name" wire:model="division_name">
+                                    @error('division_name')
                                     <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                                 </span>
@@ -207,11 +207,11 @@
                                 <div class="form-group">
                                     <label for="name">Division Code</label>
                                     <input type="text"
-                                           class="form-control @error('form.division_code') is-invalid @enderror"
+                                           class="form-control @error('division_code') is-invalid @enderror"
                                            id="name"
                                            placeholder="Division Code"
-                                           wire:model="form.division_code">
-                                    @error('form.division_code')
+                                           wire:model="division_code">
+                                    @error('division_code')
                                     <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                                 </span>
@@ -221,9 +221,9 @@
                             <div class="form-group">
                                 <label for="name">Order</label>
                                 <input type="number"
-                                       class="form-control @error('form.order') is-invalid @enderror"
-                                       id="name" placeholder="Enter Order" wire:model.live="form.order">
-                                @error('form.order')
+                                       class="form-control @error('order') is-invalid @enderror"
+                                       id="name" placeholder="Enter Order" wire:model.live="order">
+                                @error('order')
                                 <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                                 </span>
@@ -232,9 +232,9 @@
                             <div class="form-group">
                                 <label for="name">Division Address *</label>
                                 <textarea type="text"
-                                       class="form-control @error('form.division_address') is-invalid @enderror"
-                                       id="name" placeholder="Enter icon (e.g fa fa-user)" wire:model="form.division_address"></textarea>
-                                @error('form.division_address')
+                                       class="form-control @error('division_address') is-invalid @enderror"
+                                       id="name" placeholder="Enter icon (e.g fa fa-user)" wire:model="division_address"></textarea>
+                                @error('division_address')
                                 <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                                 </span>
@@ -245,12 +245,12 @@
                             <div class="form-group">
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox"
-                                           class="custom-control-input @error('form.is_active') is-invalid @enderror"
+                                           class="custom-control-input @error('is_active') is-invalid @enderror"
                                            id="is_active"
-                                           wire:model.lazy="form.is_active" @isset($service) {{ $service->is_active==true ? 'checked' : ''}} @endisset>
+                                           wire:model="is_active">
                                     <label class="custom-control-label" for="is_active">Status *</label>
                                 </div>
-                                @error('form.is_active')
+                                @error('is_active')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                     </span>
